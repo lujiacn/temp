@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>The HTML5 Herald</title>
+  <meta name="description" content="The HTML5 Herald">
+  <meta name="author" content="SitePoint">
+
+  <link rel="stylesheet" href="css/styles.css?v=1.0">
+  <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+  <![endif]-->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega@3"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
+</head>
+
+<body>
+  Hello
+<div id="m2"></div>
+<div id="m2_3"> </div>
+<script type="text/javascript">
+  $.getJSON("https://raw.githubusercontent.com/lujiacn/temp/master/test_plan.json", function(data) {
+    var m2 = data.M2_chart2
+    var m2_3 = data.M2_chart3
+    var m2_spec = {
+      "$schema": "https://vega.github.io/schema/vega-lite/v2.0.json",
+      "description": "A simple bar chart with embedded data.",
+      "width": 300,
+      "data": {
+        "values": m2  },
+      "transform":[
+        {"filter":"datum.x > 0"}
+
+      ],
+      "mark": "line",
+      "encoding": {
+        "x": {"field": "x", "type": "quantitative"},
+        "y": {"field": "y", "type": "quantitative"},
+        "color":{"field":"category", "type":"nominal"}
+      }
+    }
+    vegaEmbed("#m2", m2_spec);
+
+
+    var m2_3_spec = {
+      "$schema": "https://vega.github.io/schema/vega-lite/v2.0.json",
+      "description": "A simple bar chart with embedded data.",
+      "width": 300,
+      "data": {
+        "values": m2_3 },
+      "transform":[
+        {"filter":"datum.x > 0"}
+
+      ],
+      "mark": "point",
+      "encoding": {
+        "x": {"field": "x", "type": "quantitative", "scale": {"domain": [5, 6]}},
+        "y": {"field": "y", "type": "quantitative"}
+      }
+    }
+    vegaEmbed("#m2_3", m2_3_spec);
+  })
+
+    </script>
+</body>
+</html>
